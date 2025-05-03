@@ -3,7 +3,11 @@ import "./App.css";
 import { UserStoryWrapper, Wrapper } from "./styles";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "./hooks";
-import { setStories } from "./reducers/mainSlice";
+import {
+  setCurrentActiveStoryIndex,
+  setOpenStory,
+  setUsers,
+} from "./reducers/mainSlice";
 import { User } from "./types";
 import { userStories } from "./data";
 import StoryViewer from "./components/StoryViewer";
@@ -19,9 +23,19 @@ const fetchUserStories = async () => {
   }
 };
 
-const UserStory = ({ user }: { user: User }) => {
+type UserStoryType = {
+  user: User;
+  onClick: (currentIndex: number) => void;
+  currentIndex: number;
+};
+
+const UserStory = ({ user, onClick, currentIndex }: UserStoryType) => {
   return (
-    <UserStoryWrapper className="user-story-wrapper" isSeen={user.isSeen}>
+    <UserStoryWrapper
+      className="user-story-wrapper"
+      isSeen={user.isSeen}
+      onClick={() => onClick(currentIndex)}
+    >
       <img src={user.avatar} alt="avatar" className="avatar" />
     </UserStoryWrapper>
   );
@@ -29,16 +43,21 @@ const UserStory = ({ user }: { user: User }) => {
 
 function App() {
   const dispatch = useAppDispatch();
-  const stories = useAppSelector((state) => state.stories);
+  const users = useAppSelector((state) => state.users);
 
   useEffect(() => {
     (async () => {
-      if (!stories.length) {
+      if (!users.length) {
         const response = await fetchUserStories();
-        dispatch(setStories(response.stories));
+        dispatch(setUsers(response.stories));
       }
     })();
   }, []);
+
+  const openStoryViewer = (currentIndex: number) => {
+    dispatch(setOpenStory(true));
+    dispatch(setCurrentActiveStoryIndex(currentIndex));
+  };
 
   return (
     <Wrapper>
@@ -51,9 +70,14 @@ function App() {
       </header>
       <section className="stories-wrapper">
         <ul className="stories">
-          {userStories?.map((user) => {
-            return <UserStory key={user.userId} user={user} />;
-          })}
+          {userStories?.map((user, index) => (
+            <UserStory
+              key={user.userId}
+              user={user}
+              currentIndex={index}
+              onClick={openStoryViewer}
+            />
+          ))}
         </ul>
       </section>
       <main className="feed"></main>

@@ -7,7 +7,7 @@ export const userStories = [
     stories: [
       {
         id: "s1",
-        image: "https://picsum.photos/id/1011/500/800",
+        image: "https://picsum.photos/id/1011/1200/1800",
         timestamp: "2025-05-01T10:00:00Z",
       },
       {
@@ -61,17 +61,17 @@ export const userStories = [
     stories: [
       {
         id: "s7",
-        image: "https://picsum.photos/id/1049/500/800",
+        image: "https://picsum.photos/id/1059/500/800",
         timestamp: "2025-05-01T15:00:00Z",
       },
       {
         id: "s8",
-        image: "https://picsum.photos/id/1062/500/800",
+        image: "https://picsum.photos/id/1072/500/800",
         timestamp: "2025-05-01T17:00:00Z",
       },
       {
         id: "s9",
-        image: "https://picsum.photos/id/1074/500/800",
+        image: "https://picsum.photos/id/1084/500/800",
         timestamp: "2025-05-01T18:00:00Z",
       },
     ],

@@ -13,5 +13,7 @@ export interface User {
 }
 
 export interface InitialState {
-  stories: User[];
+  users: User[];
+  openStory: boolean;
+  currentStoryIndex: number;
 }

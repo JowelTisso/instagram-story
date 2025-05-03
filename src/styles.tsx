@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-const COLORS = Object.freeze({
+export const COLORS = Object.freeze({
   story_gradient1: "#6228d7",
   story_gradient2: "#ee2a7b",
   story_gradient3: "#f9ce34",
   gray: "#d6d6d6",
+  gray2: "rgba(209, 209, 209, 1)",
   white: "#fff",
-  modalBg: "#000",
+  black: "#000",
 });
 
 export const Wrapper = styled.div`
@@ -48,6 +49,7 @@ export const UserStoryWrapper = styled.li<{ isSeen: boolean }>`
       ? COLORS.gray
       : `linear-gradient(${COLORS.story_gradient1}, ${COLORS.story_gradient2}, ${COLORS.story_gradient3})`;
   }};
+
   .avatar {
     height: 100px;
     border-radius: 50%;
