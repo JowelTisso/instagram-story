@@ -10,7 +10,7 @@ Modal.setAppElement("#root");
 
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
-    <ErrorBoundary fallback={<p>Error</p>}>
+    <ErrorBoundary>
       <App />
     </ErrorBoundary>
   </Provider>

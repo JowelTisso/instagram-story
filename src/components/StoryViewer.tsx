@@ -3,15 +3,15 @@ import { ModalWrapper } from "./StoryViewerStyles";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { setOpenStory } from "../reducers/mainSlice";
 import { AiOutlineEllipsis, AiOutlineClose } from "react-icons/ai";
-import { userStories } from "../data";
 import { COLORS } from "../styles";
 
 const StoryViewer = () => {
   const openStory = useAppSelector((state) => state.openStory);
+  const userStories = useAppSelector((state) => state.users);
   const currentStoryIndex = useAppSelector((state) => state.currentStoryIndex);
 
   const dispatch = useAppDispatch();
-  //TODO:change to data from api call
+
   const currentUser = userStories[currentStoryIndex ?? 0];
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -83,7 +83,7 @@ const StoryViewer = () => {
     <ModalWrapper isOpen={openStory}>
       <header>
         <div className="timeline">
-          {currentUser?.stories.map((user, pIndex) => (
+          {currentUser?.stories?.map((user, pIndex) => (
             <progress
               key={user.id}
               value={getProgressValue(pIndex, currentSlideIndex)}
@@ -111,7 +111,7 @@ const StoryViewer = () => {
       <main className="content">
         <div className="btn-backdrop btn-left" onClick={prevSlide}></div>
         <div className="story-wrapper">
-          {currentUser?.stories.map((story) => (
+          {currentUser?.stories?.map((story) => (
             <img
               className="img"
               key={story.id}

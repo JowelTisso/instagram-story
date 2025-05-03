@@ -1,4 +1,5 @@
 import * as React from "react";
+import styled from "styled-components";
 
 type ErrorProps = {
   fallback?: React.ReactNode | string;
@@ -8,6 +9,18 @@ type ErrorProps = {
 type StateType = {
   hasError: boolean;
 };
+
+const ErrorBoundaryWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  flex-direction: column;
+
+  .img-error {
+    width: 50%;
+  }
+`;
 
 export default class ErrorBoundary extends React.Component<
   ErrorProps,
@@ -19,7 +32,6 @@ export default class ErrorBoundary extends React.Component<
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
     console.log(error);
 
     return { hasError: true };
@@ -31,8 +43,14 @@ export default class ErrorBoundary extends React.Component<
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return this.props.fallback;
+      return (
+        this.props.fallback ?? (
+          <ErrorBoundaryWrapper>
+            <img src="/error.svg" alt="Error image" className="img-error" />
+            <h2>Something went wrong!</h2>
+          </ErrorBoundaryWrapper>
+        )
+      );
     }
 
     return this.props.children;

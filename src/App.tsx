@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useTransition } from "react";
 import "./App.css";
-import { UserStoryWrapper, Wrapper } from "./styles";
+import { COLORS, Wrapper } from "./styles";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import {
@@ -8,57 +8,57 @@ import {
   setOpenStory,
   setUsers,
 } from "./reducers/mainSlice";
-import { User } from "./types";
-import { userStories } from "./data";
 import StoryViewer from "./components/StoryViewer";
+import { FadeLoader } from "react-spinners";
+import UserStory from "./components/UserStory";
+
+const storiesUrl =
+  "https://run.mocky.io/v3/0c78e16c-d83c-42df-be4b-fb5f885ba7f6";
 
 const fetchUserStories = async () => {
   try {
-    const response = await axios.get(
-      "https://run.mocky.io/v3/d6c21744-d620-4d5d-bbe4-9672e999d319"
-    );
+    const response = await axios.get(storiesUrl);
     return response ? response.data : null;
   } catch (e) {
     console.log(e);
   }
 };
 
-type UserStoryType = {
-  user: User;
-  onClick: (currentIndex: number) => void;
-  currentIndex: number;
-};
-
-const UserStory = ({ user, onClick, currentIndex }: UserStoryType) => {
-  return (
-    <UserStoryWrapper
-      className="user-story-wrapper"
-      isSeen={user.isSeen}
-      onClick={() => onClick(currentIndex)}
-    >
-      <img src={user.avatar} alt="avatar" className="avatar" />
-    </UserStoryWrapper>
-  );
-};
-
 function App() {
   const dispatch = useAppDispatch();
-  const users = useAppSelector((state) => state.users);
+  const userStories = useAppSelector((state) => state.users);
   const openStory = useAppSelector((state) => state.openStory);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    (async () => {
-      if (!users.length) {
+    startTransition(async () => {
+      if (!userStories.length) {
         const response = await fetchUserStories();
-        dispatch(setUsers(response.stories));
+        if (response) {
+          dispatch(setUsers(response));
+        }
       }
-    })();
+    });
   }, []);
 
   const openStoryViewer = (currentIndex: number) => {
     dispatch(setOpenStory(true));
     dispatch(setCurrentActiveStoryIndex(currentIndex));
   };
+  if (isPending)
+    return (
+      <div
+        style={{
+          display: "flex",
+          height: "100%",
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <FadeLoader color={COLORS.story_gradient2} />
+      </div>
+    );
 
   return (
     <Wrapper>

@@ -35,25 +35,3 @@ export const Wrapper = styled.div`
     gap: 20px;
   }
 `;
-
-export const UserStoryWrapper = styled.li<{ isSeen: boolean }>`
-  list-style: none;
-  border-radius: 50%;
-  height: 107px;
-  width: 107px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: ${(props) => {
-    return props.isSeen
-      ? COLORS.gray
-      : `linear-gradient(${COLORS.story_gradient1}, ${COLORS.story_gradient2}, ${COLORS.story_gradient3})`;
-  }};
-
-  .avatar {
-    height: 100px;
-    border-radius: 50%;
-    padding: 4px;
-    background-color: ${COLORS.white};
-  }
-`;

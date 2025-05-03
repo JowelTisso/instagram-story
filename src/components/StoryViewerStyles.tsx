@@ -1,10 +1,22 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { COLORS } from "../styles";
 import Modal from "react-modal";
+
+const zoomIn = keyframes`
+from {
+    transform: scale(0.8);
+    opacity: 0.5;
+}
+to {
+    transform: scale(1);
+    opacity: 1;
+}
+`;
 
 export const ModalWrapper = styled(Modal)`
   background-color: ${COLORS.black};
   height: 100%;
+  animation: ${zoomIn} 0.3s ease-out;
   header {
     position: absolute;
     top: 0;

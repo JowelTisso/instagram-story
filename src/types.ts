@@ -17,3 +17,9 @@ export interface InitialState {
   openStory: boolean;
   currentStoryIndex: number;
 }
+
+export type UserStoryType = {
+  user: User;
+  onClick: (currentIndex: number) => void;
+  currentIndex: number;
+};
