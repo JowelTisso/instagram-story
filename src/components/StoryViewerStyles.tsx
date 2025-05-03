@@ -114,10 +114,12 @@ export const ModalWrapper = styled(Modal)`
       display: flex;
       overflow: hidden;
       height: 100%;
+
       .img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: all 300ms ease-out;
       }
     }
   }

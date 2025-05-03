@@ -44,6 +44,7 @@ const UserStory = ({ user, onClick, currentIndex }: UserStoryType) => {
 function App() {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users);
+  const openStory = useAppSelector((state) => state.openStory);
 
   useEffect(() => {
     (async () => {
@@ -81,7 +82,7 @@ function App() {
         </ul>
       </section>
       <main className="feed"></main>
-      <StoryViewer />
+      {openStory && <StoryViewer />}
     </Wrapper>
   );
 }
