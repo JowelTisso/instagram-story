@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { setOpenStory } from "../reducers/mainSlice";
 import { AiOutlineEllipsis, AiOutlineClose } from "react-icons/ai";
 import { COLORS } from "../styles";
+import { FadeLoader } from "react-spinners";
 
 const StoryViewer = () => {
   const openStory = useAppSelector((state) => state.openStory);
@@ -16,7 +17,8 @@ const StoryViewer = () => {
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [progressValue, setProgressValue] = useState(0);
-  const intervalIdRef = useRef<number>(null);
+  const intervalIdRef = useRef<NodeJS.Timeout>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   //Status bar theme change when viewing story
   useEffect(() => {
@@ -121,10 +123,18 @@ const StoryViewer = () => {
               style={{
                 translate: `-${100 * currentSlideIndex}%`,
               }}
+              onLoad={() => {
+                setIsLoading(false);
+              }}
             />
           ))}
         </div>
         <div className="btn-backdrop btn-right" onClick={nextSlide}></div>
+        {isLoading && (
+          <div className="loader-wrapper">
+            <FadeLoader color={COLORS.story_gradient3} />
+          </div>
+        )}
       </main>
     </ModalWrapper>
   );

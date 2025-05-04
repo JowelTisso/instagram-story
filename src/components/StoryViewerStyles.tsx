@@ -6,17 +6,24 @@ const zoomIn = keyframes`
 from {
     transform: scale(0.8);
     opacity: 0.5;
+    width: 100px;
+    height: 100px;
+    left: 50%;
 }
 to {
     transform: scale(1);
     opacity: 1;
+    width: 100%;
+    height: 100%;
+    left: 0;
 }
 `;
 
 export const ModalWrapper = styled(Modal)`
   background-color: ${COLORS.black};
   height: 100%;
-  animation: ${zoomIn} 0.3s ease-out;
+  animation: ${zoomIn} 0.2s ease-out;
+  position: relative;
   header {
     position: absolute;
     top: 0;

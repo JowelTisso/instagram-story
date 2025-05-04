@@ -13,7 +13,7 @@ import { FadeLoader } from "react-spinners";
 import UserStory from "./components/UserStory";
 
 const storiesUrl =
-  "https://run.mocky.io/v3/0c78e16c-d83c-42df-be4b-fb5f885ba7f6";
+  "https://run.mocky.io/v3/966b8e58-ae38-43fe-a51a-643213bca5c0";
 
 const fetchUserStories = async () => {
   try {
@@ -45,18 +45,11 @@ function App() {
     dispatch(setOpenStory(true));
     dispatch(setCurrentActiveStoryIndex(currentIndex));
   };
+
   if (isPending)
     return (
-      <div
-        style={{
-          display: "flex",
-          height: "100%",
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <FadeLoader color={COLORS.story_gradient2} />
+      <div className="loader-wrapper">
+        <FadeLoader color={COLORS.story_gradient3} />
       </div>
     );
 
