@@ -63,7 +63,7 @@ function App() {
         />
       </header>
       <section className="stories-wrapper">
-        <ul className="stories">
+        <ul className="stories" data-testid="stories">
           {userStories?.map((user, index) => (
             <UserStory
               key={user.userId}

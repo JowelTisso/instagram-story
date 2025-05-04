@@ -83,7 +83,7 @@ const StoryViewer = () => {
 
   return (
     <ModalWrapper isOpen={openStory}>
-      <header>
+      <header data-testid="story-viewer">
         <div className="timeline">
           {currentUser?.stories?.map((user, pIndex) => (
             <progress
@@ -105,13 +105,18 @@ const StoryViewer = () => {
             <AiOutlineEllipsis className="icon-more" />
             <AiOutlineClose
               className="icon-close"
+              data-testid="btn-close"
               onClick={() => dispatch(setOpenStory(false))}
             />
           </div>
         </div>
       </header>
       <main className="content">
-        <div className="btn-backdrop btn-left" onClick={prevSlide}></div>
+        <div
+          className="btn-backdrop btn-left"
+          onClick={prevSlide}
+          data-testid="btn-left"
+        ></div>
         <div className="story-wrapper">
           {currentUser?.stories?.map((story) => (
             <img
@@ -129,7 +134,11 @@ const StoryViewer = () => {
             />
           ))}
         </div>
-        <div className="btn-backdrop btn-right" onClick={nextSlide}></div>
+        <div
+          className="btn-backdrop btn-right"
+          onClick={nextSlide}
+          data-testid="btn-right"
+        ></div>
         {isLoading && (
           <div className="loader-wrapper">
             <FadeLoader color={COLORS.story_gradient3} />

@@ -27,6 +27,7 @@ export const UserStoryWrapper = styled.li<{ $isSeen: boolean }>`
 const UserStory = ({ user, onClick, currentIndex }: UserStoryType) => {
   return (
     <UserStoryWrapper
+      data-testid="story-item"
       className="user-story-wrapper"
       $isSeen={user.isSeen}
       onClick={() => onClick(currentIndex)}
