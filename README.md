@@ -2,6 +2,8 @@
 
 An Instagram-like story viewer built with React, TypeScript, and Vite. This project showcases a performant and scalable frontend architecture, complete with automated testing using Playwright.
 
+Live Link : https://insta-story-viewer.netlify.app/
+
 ## 🚀 Features
 
 - **Story List**: Overview of user stories to view from.
